@@ -1,9 +1,9 @@
-const index = () => {
+const Profile = () => {
     return (
         <>
-            <h1>User Profile</h1>
+            <h1 className="text-6xl font-bold underlinel">User Profile</h1>
         </>
     );
 };
 
-export default index;
+export default Profile;
