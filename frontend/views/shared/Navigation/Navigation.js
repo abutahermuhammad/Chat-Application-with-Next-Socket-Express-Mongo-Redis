@@ -1,12 +1,14 @@
 import { Avatar } from "evergreen-ui";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import useAuth from "../../../hooks/useAuth";
 import Container from "../Container/Container";
 
 const Navigation = () => {
-    const { user, loggedin } = useAuth();
+    const router = useRouter();
+    const { user, loggedin, signoutHandler } = useAuth();
 
-    console.log("Logged in", loggedin);
+    console.log("route", router);
 
     return (
         <>
@@ -24,16 +26,68 @@ const Navigation = () => {
                             </div>
 
                             {/* Right Side */}
-                            <div className="">
+                            <div className="group inline-block relative">
                                 <Avatar
-                                    src="https://upload.wikimedia.org/wikipedia/commons/a/a1/Alan_Turing_Aged_16.jpg"
+                                    src={
+                                        user.photoURL
+                                            ? user.photoURL
+                                            : "https://upload.wikimedia.org/wikipedia/commons/a/a1/Alan_Turing_Aged_16.jpg"
+                                    }
                                     name={
-                                        user.displayname
-                                            ? user.displayname
+                                        user.displayName
+                                            ? user.displayName
                                             : "Unknown"
                                     }
                                     size={36}
                                 />
+
+                                <ul class="absolute shadow-2xl hidden text-gray-700 pt-1 group-hover:block">
+                                    {loggedin && user.email && (
+                                        <>
+                                            <li class="">
+                                                <Link href="/profile">
+                                                    <a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap">
+                                                        Profile
+                                                    </a>
+                                                </Link>
+                                            </li>
+                                            <li class="">
+                                                <Link href="/settings">
+                                                    <a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap">
+                                                        Settings
+                                                    </a>
+                                                </Link>
+                                            </li>
+
+                                            <li
+                                                class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
+                                                onClick={signoutHandler}
+                                            >
+                                                Sign out
+                                            </li>
+                                        </>
+                                    )}
+
+                                    {/* Logged out state */}
+                                    {!loggedin && !user.email && (
+                                        <>
+                                            <li class="">
+                                                <Link href="/login">
+                                                    <a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap">
+                                                        Sign in
+                                                    </a>
+                                                </Link>
+                                            </li>
+                                            <li class="">
+                                                <Link href="/register">
+                                                    <a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap">
+                                                        Register
+                                                    </a>
+                                                </Link>
+                                            </li>
+                                        </>
+                                    )}
+                                </ul>
                             </div>
                         </div>
                     </Container>
