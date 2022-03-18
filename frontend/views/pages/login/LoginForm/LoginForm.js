@@ -11,34 +11,50 @@ const LoginForm = () => {
     // States
     const [loging, setLoging] = useState(false);
     const [gLoging, setGLoging] = useState(false);
-    const [error, setError] = useState(false);
-    const [success, setSuccess] = useState(false);
-    const { user, signinWith0Handler } = useAuth();
+    // const [error, setError] = useState(false);
+    // const [success, setSuccess] = useState(false);
+    const {
+        loggedin,
+        user,
+        error,
+        success,
+        signinWith0Handler,
+        signinWithFormHandler,
+    } = useAuth();
 
-    const loginHandler = (e) => {
-        e.preventDefault();
-
+    const loginHandler = async (e, email, password) => {
         setLoging(true);
-        console.log(image, name, email);
+        await e.preventDefault();
+
+        const user = {
+            email: email,
+            password: password,
+        };
+
+        await signinWithFormHandler(user);
         setLoging(false);
+    };
+
+    const Handler0Auth = (method) => {
+        signinWithFormHandler();
     };
 
     return (
         <>
             <section className="mv_login-form min-h-fit">
-                <Container className="xl:pt-12">
+                <Container className="xl:pt-12 md:pt-10 sm:pt-7">
                     <h4 className="text-6xl text-center mb-5">Log in</h4>
                 </Container>
 
                 <Container className="flex justify-center items-center xl:pt-2">
                     <form
                         className="xl:w-2/6 md:w-3/5 p-7 shadow-xl "
-                        onSubmit={loginHandler}
+                        onSubmit={(e) => loginHandler(e, email, password)}
                     >
                         {success && (
                             <Alert
                                 intent="success"
-                                title="Successfully signed in!"
+                                title={success}
                                 marginBottom={20}
                             />
                         )}
@@ -46,12 +62,12 @@ const LoginForm = () => {
                         {error && (
                             <Alert
                                 intent="danger"
-                                title="Something wrong. Can not sign in now!"
+                                title={error}
                                 marginBottom={20}
                             />
                         )}
 
-                        {success ? (
+                        {loggedin && user.email ? (
                             <div className="xl:py-16 md:py-10 sm:py-7 flex flex-col items-center justify-between">
                                 <Spinner className="mb-3" size={25} />
                                 <p>Redirecting to profile page</p>
@@ -61,7 +77,7 @@ const LoginForm = () => {
                                 <TextInput
                                     disabled={loging}
                                     style={{ width: "100%" }}
-                                    className="w-full mb-3"
+                                    className="w-full p-2 text-base mb-3"
                                     isInvalid={false}
                                     required
                                     type="email"

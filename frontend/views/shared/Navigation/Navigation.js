@@ -41,7 +41,7 @@ const Navigation = () => {
                                     size={36}
                                 />
 
-                                <ul class="absolute shadow-2xl hidden text-gray-700 pt-1 group-hover:block">
+                                <ul class="absolute right-0 w-48 shadow-2xl hidden text-gray-700 pt-1 group-hover:block">
                                     {loggedin && user.email && (
                                         <>
                                             <li class="">
@@ -89,6 +89,40 @@ const Navigation = () => {
                                     )}
                                 </ul>
                             </div>
+                        </div>
+                    </Container>
+                </nav>
+
+                <nav className="mv_primary-nav border-t border-slate-300 hover:border-slate-400">
+                    <Container className="">
+                        <div className="l">
+                            <ul class="flex">
+                                {loggedin && user.email && (
+                                    <>
+                                        <li class="pt-1 pb-2 mr-4 border-b-2">
+                                            <Link href="/profile">
+                                                <a class="relative inline-block rounded bg-gray-200 hover:bg-gray-400 whitespace-no-wrap">
+                                                    General
+                                                </a>
+                                            </Link>
+                                        </li>
+                                        <li class="py-1 pr-4">
+                                            <Link href="/settings">
+                                                <a class="rounded-t bg-gray-200 hover:bg-gray-400 block whitespace-no-wrap">
+                                                    Activity
+                                                </a>
+                                            </Link>
+                                        </li>
+                                        <li class="py-1 pr-4">
+                                            <Link href="/settings">
+                                                <a class="rounded-t bg-gray-200 hover:bg-gray-400 block whitespace-no-wrap">
+                                                    Settings
+                                                </a>
+                                            </Link>
+                                        </li>
+                                    </>
+                                )}
+                            </ul>
                         </div>
                     </Container>
                 </nav>

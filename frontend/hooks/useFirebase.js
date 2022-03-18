@@ -21,7 +21,9 @@ const useFirebase = () => {
     const [loggedin, setLoggedin] = useState(false);
     const [role, setRole] = useState("admin");
     const [user, setUser] = useState({}); // User state
-    const [message, setMessage] = useState(""); // Warning message state.
+    const [error, setError] = useState("");
+    const [success, setSuccess] = useState("df");
+    const [message, setMessage] = useState("df"); // Warning message state.
     // User Auth
     const auth = getAuth();
 
@@ -50,11 +52,14 @@ const useFirebase = () => {
                     result?.user?.photoURL
                 );
                 setLoggedin(true);
-                setMessage("");
                 userRoleUpdate(result.user.email);
+                // Messages
+                setError("");
+                setSuccess("Successfully signed in!");
             })
             .catch((error) => {
-                setMessage(error.message);
+                setSuccess("");
+                setError(error.message);
             });
     };
 
@@ -67,9 +72,13 @@ const useFirebase = () => {
                 setUser(result.user);
                 setLoggedin(true);
                 userRoleUpdate(result.user.email);
-                setMessage("Signed in successfully");
+                setError("");
+                setSuccess("Signed in successfully");
             })
-            .catch((error) => setMessage(error.message));
+            .catch((error) => {
+                setSuccess("");
+                setError(error.message);
+            });
     };
 
     /**
@@ -88,9 +97,13 @@ const useFirebase = () => {
                 setUser(result.user); // Updating the user state.
                 setLoggedin(true); // Updating the logged in state.
                 userRoleUpdate(result.user.email);
-                setMessage("Account created successfully");
+                setError("");
+                setSuccess("Account created successfully");
             })
-            .catch((error) => setMessage(error.message));
+            .catch((error) => {
+                setSuccess("");
+                setError(error.message);
+            });
     };
 
     /**
@@ -112,9 +125,13 @@ const useFirebase = () => {
             .then(() => {
                 setUser({});
                 setLoggedin(false);
-                setMessage("Successfully Sign out");
+                setError("");
+                setSuccess("Successfully Sign out");
             })
-            .catch((error) => setMessage(error.message));
+            .catch((error) => {
+                setSuccess(error.message);
+                setError("");
+            });
     };
 
     /**
@@ -131,7 +148,7 @@ const useFirebase = () => {
             role: "visitor",
         };
 
-        fetch(`${process.env.REACT_APP_API_URI}/user`, {
+        fetch(`${process.env.NEXT_PUBLIC_API_URI}/user`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -199,6 +216,8 @@ const useFirebase = () => {
         loggedin,
         role,
         message,
+        error,
+        success,
         signupWithFormHandler,
         signinWithFormHandler,
         signinWith0Handler,

@@ -1,7 +1,10 @@
 module.exports = {
     // prefix: "mv_",
-    darkMode: "media",
-    content: ["./pages/**/*.{js,ts,jsx,tsx}", "./views/**/*.{js,ts,jsx,tsx}"],
+    // darkMode: "media",
+    content: [
+        "./pages/**/**/**/*.{js,ts,jsx,tsx}",
+        "./views/**/**/**/*.{js,ts,jsx,tsx}",
+    ],
     theme: {
         colors: {
             blue: "#1fb6ff",
@@ -15,8 +18,7 @@ module.exports = {
             "gray-light": "#d3dce6",
         },
         fontFamily: {
-            sans: ["Graphik", "sans-serif"],
-            serif: ["Merriweather", "serif"],
+            sans: ["Inter", "sans-serif"],
         },
         extend: {
             spacing: {

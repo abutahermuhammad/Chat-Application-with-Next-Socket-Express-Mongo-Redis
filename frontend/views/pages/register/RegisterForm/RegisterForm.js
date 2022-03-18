@@ -1,6 +1,7 @@
 import { Alert, Button, Spinner, TextInput } from "evergreen-ui";
 import Link from "next/link";
 import { useState } from "react";
+import useAuth from "../../../../hooks/useAuth";
 import Container from "../../../shared/Container/Container";
 
 const RegisterForm = () => {
@@ -11,14 +12,28 @@ const RegisterForm = () => {
     // States
     const [loging, setLoging] = useState(false);
     const [gLoging, setGLoging] = useState(false);
-    const [error, setError] = useState(false);
-    const [success, setSuccess] = useState(false);
+    // const [error, setError] = useState(false);
+    // const [success, setSuccess] = useState(false);
+    const {
+        loggedin,
+        user,
+        message,
+        error,
+        success,
+        signinWith0Handler,
+        signupWithFormHandler,
+    } = useAuth();
 
-    const loginHandler = (e) => {
+    const registerHandler = (e, name, email, password) => {
         e.preventDefault();
-
         setLoging(true);
-        console.log(image, name, email);
+
+        const user = {
+            name: name,
+            email: email,
+            password: password,
+        };
+        signupWithFormHandler(user);
         setLoging(false);
     };
 
@@ -34,12 +49,14 @@ const RegisterForm = () => {
                 <Container className="flex justify-center items-center xl:pt-2">
                     <form
                         className="xl:w-2/6 md:w-3/5 p-7 shadow-xl "
-                        onSubmit={loginHandler}
+                        onSubmit={(e) =>
+                            registerHandler(e, name, email, password)
+                        }
                     >
                         {success && (
                             <Alert
                                 intent="success"
-                                title="Successfully signed in!"
+                                title={success}
                                 marginBottom={20}
                             />
                         )}
@@ -47,12 +64,19 @@ const RegisterForm = () => {
                         {error && (
                             <Alert
                                 intent="danger"
-                                title="Something wrong. Can not sign in now!"
+                                title={error}
+                                marginBottom={20}
+                            />
+                        )}
+                        {message && (
+                            <Alert
+                                intent="danger"
+                                title={message}
                                 marginBottom={20}
                             />
                         )}
 
-                        {success ? (
+                        {loggedin && user.email ? (
                             <div className="xl:py-16 md:py-10 sm:py-7 flex flex-col items-center justify-between">
                                 <Spinner className="mb-3" size={25} />
                                 <p>Redirecting to profile page</p>
