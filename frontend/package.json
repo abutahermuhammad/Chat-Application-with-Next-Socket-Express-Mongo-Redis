@@ -10,8 +10,10 @@
         "cypress": "cypress open"
     },
     "dependencies": {
-        "evergreen-ui": "^6.9.3",
+        "@geist-ui/core": "^2.3.7",
+        "@geist-ui/icons": "^1.0.1",
         "firebase": "^9.6.8",
+        "inter-ui": "^3.19.3",
         "next": "12.1.0",
         "react": "17.0.2",
         "react-dom": "17.0.2",

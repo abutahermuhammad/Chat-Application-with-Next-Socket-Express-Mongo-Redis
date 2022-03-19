@@ -22,8 +22,8 @@ const useFirebase = () => {
     const [role, setRole] = useState("admin");
     const [user, setUser] = useState({}); // User state
     const [error, setError] = useState("");
-    const [success, setSuccess] = useState("df");
-    const [message, setMessage] = useState("df"); // Warning message state.
+    const [success, setSuccess] = useState("");
+    const [message, setMessage] = useState(""); // Warning message state.
     // User Auth
     const auth = getAuth();
 

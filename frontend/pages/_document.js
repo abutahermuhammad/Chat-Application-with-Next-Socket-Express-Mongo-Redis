@@ -1,6 +1,9 @@
+import { CssBaseline } from "@geist-ui/core";
 import { Head, Html, Main, NextScript } from "next/document";
 
 export default function Document() {
+    const styles = CssBaseline.flush();
+
     return (
         <Html lang="en">
             <Head>
@@ -14,6 +17,7 @@ export default function Document() {
                     href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
                     rel="stylesheet"
                 />
+                {styles}
             </Head>
 
             <body>

@@ -1,6 +1,7 @@
 module.exports = {
     // prefix: "mv_",
     // darkMode: "media",
+    important: true,
     content: [
         "./pages/**/**/**/*.{js,ts,jsx,tsx}",
         "./views/**/**/**/*.{js,ts,jsx,tsx}",

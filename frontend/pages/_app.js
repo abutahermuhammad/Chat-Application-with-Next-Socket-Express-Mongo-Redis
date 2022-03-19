@@ -1,12 +1,16 @@
+import { CssBaseline, GeistProvider } from "@geist-ui/core";
 import AuthProvider from "../contexts/AuthProvider";
 import "../styles/main.styles.sass";
-import "../styles/output.styles.css";
+// import "../styles/output.styles.css";
 import "../styles/tailwind.styles.css";
 
 function MyApp({ Component, pageProps }) {
     return (
         <AuthProvider>
-            <Component {...pageProps} />
+            <GeistProvider>
+                <CssBaseline />
+                <Component {...pageProps} />
+            </GeistProvider>
         </AuthProvider>
     );
 }

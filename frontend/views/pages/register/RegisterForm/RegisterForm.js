@@ -1,4 +1,4 @@
-import { Alert, Button, Spinner, TextInput } from "evergreen-ui";
+import { Alert, Button, Spinner, TextInput } from "@geist-ui/core";
 import Link from "next/link";
 import { useState } from "react";
 import useAuth from "../../../../hooks/useAuth";
