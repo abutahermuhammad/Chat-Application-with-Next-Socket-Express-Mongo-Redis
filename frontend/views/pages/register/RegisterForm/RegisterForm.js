@@ -1,4 +1,4 @@
-import { Alert, Button, Spinner, TextInput } from "@geist-ui/core";
+import { Button, Input, Spinner } from "@geist-ui/core";
 import Link from "next/link";
 import { useState } from "react";
 import useAuth from "../../../../hooks/useAuth";
@@ -54,23 +54,23 @@ const RegisterForm = () => {
                         }
                     >
                         {success && (
-                            <Alert
-                                intent="success"
+                            <Note
+                                type="success"
                                 title={success}
                                 marginBottom={20}
                             />
                         )}
 
                         {error && (
-                            <Alert
-                                intent="danger"
+                            <Note
+                                type="danger"
                                 title={error}
                                 marginBottom={20}
                             />
                         )}
                         {message && (
-                            <Alert
-                                intent="danger"
+                            <Note
+                                type="danger"
                                 title={message}
                                 marginBottom={20}
                             />
@@ -83,7 +83,7 @@ const RegisterForm = () => {
                             </div>
                         ) : (
                             <>
-                                <TextInput
+                                <Input
                                     disabled={loging}
                                     style={{ width: "100%" }}
                                     className="w-full mb-4"
@@ -97,7 +97,7 @@ const RegisterForm = () => {
                                     onBlur={(e) => setName(e.target.value)}
                                 />
 
-                                <TextInput
+                                <Input
                                     disabled={loging}
                                     style={{ width: "100%" }}
                                     className="w-full mb-3"
@@ -112,7 +112,7 @@ const RegisterForm = () => {
                                     onBlur={(e) => setEmail(e.target.value)}
                                 />
 
-                                <TextInput
+                                <Input
                                     disabled={loging}
                                     style={{ width: "100%" }}
                                     className="w-full mb-4"

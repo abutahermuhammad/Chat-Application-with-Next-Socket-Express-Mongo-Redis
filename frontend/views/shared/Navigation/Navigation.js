@@ -92,7 +92,7 @@ const Navigation = () => {
                 </Container>
             </nav>
 
-            {router.route.includes("/profile") && (
+            {/* {router.route.includes("/profile") && (
                 <nav className="mv_primary-nav border-t border-slate-300 hover:border-slate-400">
                     <Container className="">
                         <div className="l">
@@ -126,7 +126,7 @@ const Navigation = () => {
                         </div>
                     </Container>
                 </nav>
-            )}
+            )} */}
         </>
     );
 };

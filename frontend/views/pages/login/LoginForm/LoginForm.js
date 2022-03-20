@@ -1,4 +1,4 @@
-import { Alert, Button, Spinner, TextInput } from "@geist-ui/core";
+import { Button, Input, Note, Spinner } from "@geist-ui/core";
 import Link from "next/link";
 import { useState } from "react";
 import useAuth from "../../../../hooks/useAuth";
@@ -52,16 +52,16 @@ const LoginForm = () => {
                         onSubmit={(e) => loginHandler(e, email, password)}
                     >
                         {success && (
-                            <Alert
-                                intent="success"
+                            <Note
+                                type="success"
                                 title={success}
                                 marginBottom={20}
                             />
                         )}
 
                         {error && (
-                            <Alert
-                                intent="danger"
+                            <Note
+                                type="danger"
                                 title={error}
                                 marginBottom={20}
                             />
@@ -74,7 +74,7 @@ const LoginForm = () => {
                             </div>
                         ) : (
                             <>
-                                <TextInput
+                                <Input
                                     disabled={loging}
                                     style={{ width: "100%" }}
                                     className="w-full p-2 text-base mb-3"
@@ -89,7 +89,7 @@ const LoginForm = () => {
                                     onBlur={(e) => setEmail(e.target.value)}
                                 />
 
-                                <TextInput
+                                <Input
                                     disabled={loging}
                                     style={{ width: "100%" }}
                                     className="w-full mb-4"
