@@ -1,4 +1,5 @@
-import { Button, Input, Note, Spinner } from "@geist-ui/core";
+import { Button, Card, Input } from "@geist-ui/core";
+import { Lock, Mail } from "@geist-ui/icons";
 import Link from "next/link";
 import { useState } from "react";
 import useAuth from "../../../../hooks/useAuth";
@@ -47,99 +48,99 @@ const LoginForm = () => {
                 </Container>
 
                 <Container className="flex justify-center items-center xl:pt-2">
-                    <form
-                        className="xl:w-2/6 md:w-3/5 p-7 shadow-xl "
-                        onSubmit={(e) => loginHandler(e, email, password)}
-                    >
-                        {success && (
-                            <Note
-                                type="success"
-                                title={success}
-                                marginBottom={20}
-                            />
-                        )}
+                    <Card className="xl:w-2/6 md:w-3/5 ">
+                        <form
+                            onSubmit={(e) => loginHandler(e, email, password)}
+                        >
+                            {success && (
+                                <Card type="success" marginBottom={20}>
+                                    <Text>{success}</Text>
+                                </Card>
+                            )}
 
-                        {error && (
-                            <Note
-                                type="danger"
-                                title={error}
-                                marginBottom={20}
-                            />
-                        )}
+                            {error && (
+                                <Note type="danger" marginBottom={20}>
+                                    <Text>{error}</Text>
+                                </Note>
+                            )}
 
-                        {loggedin && user.email ? (
-                            <div className="xl:py-16 md:py-10 sm:py-7 flex flex-col items-center justify-between">
-                                <Spinner className="mb-3" size={25} />
-                                <p>Redirecting to profile page</p>
-                            </div>
-                        ) : (
-                            <>
-                                <Input
-                                    disabled={loging}
-                                    style={{ width: "100%" }}
-                                    className="w-full p-2 text-base mb-3"
-                                    isInvalid={false}
-                                    required
-                                    type="email"
-                                    name="email"
-                                    label="Email"
-                                    placeholder="e.g. example@email.com"
-                                    validationMessage="This field is required"
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    onBlur={(e) => setEmail(e.target.value)}
-                                />
+                            {loggedin && user.email ? (
+                                <div className="xl:py-16 md:py-10 sm:py-7 flex flex-col items-center justify-between">
+                                    <Loading className="mb-3" />
+                                    <p>Redirecting to profile page</p>
+                                </div>
+                            ) : (
+                                <>
+                                    <Input
+                                        disabled={loging}
+                                        className="w-full mb-3"
+                                        width={"100%"}
+                                        icon={<Mail />}
+                                        required
+                                        // type="email"
+                                        name="email"
+                                        placeholder="e.g. example@email.com"
+                                        validationMessage="This field is required"
+                                        value={email}
+                                        onChange={(e) =>
+                                            setEmail(e.target.value)
+                                        }
+                                        onBlur={(e) => setEmail(e.target.value)}
+                                    />
 
-                                <Input
-                                    disabled={loging}
-                                    style={{ width: "100%" }}
-                                    className="w-full mb-4"
-                                    isInvalid={false}
-                                    required
-                                    type="password"
-                                    name="password"
-                                    label="Password"
-                                    placeholder="******"
-                                    validationMessage="This field is required"
-                                    onChange={(e) =>
-                                        setPassword(e.target.value)
-                                    }
-                                    onBlur={(e) => setPassword(e.target.value)}
-                                />
+                                    <Input
+                                        disabled={loging}
+                                        width={"100%"}
+                                        className="w-full mb-4"
+                                        icon={<Lock />}
+                                        required
+                                        name="password"
+                                        placeholder="******"
+                                        validationMessage="This field is required"
+                                        onChange={(e) =>
+                                            setPassword(e.target.value)
+                                        }
+                                        onBlur={(e) =>
+                                            setPassword(e.target.value)
+                                        }
+                                    />
 
-                                {/* Login Button */}
-                                <Button
-                                    disabled={loging}
-                                    className="w-full mb-3"
-                                    type="submit"
-                                >
-                                    {loging ? <Spinner size={16} /> : "Sign in"}
-                                </Button>
+                                    {/* Login Button */}
+                                    <Button
+                                        disabled={loging}
+                                        className="w-full mb-3"
+                                        type="secondary"
+                                        // icon={<LogIn />}
+                                    >
+                                        {loging ? <Loading /> : "Sign in"}
+                                    </Button>
 
-                                {/* Sign in with google */}
-                                <Button
-                                    disabled={gLoging}
-                                    className="w-full mb-5 font-bold"
-                                    onClick={() => {
-                                        setGLoging(true);
-                                        signinWith0Handler("google");
-                                    }}
-                                >
-                                    {gLoging ? (
-                                        <Spinner size={16} />
-                                    ) : (
-                                        "Login with Gmail"
-                                    )}
-                                </Button>
+                                    {/* Sign in with google */}
+                                    <Button
+                                        disabled={gLoging}
+                                        className="w-full mb-5"
+                                        onClick={() => {
+                                            setGLoging(true);
+                                            signinWith0Handler("google");
+                                        }}
+                                    >
+                                        {gLoging ? (
+                                            <Loading />
+                                        ) : (
+                                            "Login with Gmail"
+                                        )}
+                                    </Button>
 
-                                <p className="text-center">
-                                    Are you a new user?{" "}
-                                    <Link href="/register">
-                                        <a>Register an account</a>
-                                    </Link>
-                                </p>
-                            </>
-                        )}
-                    </form>
+                                    <p className="text-center">
+                                        Are you a new user?{" "}
+                                        <Link href="/register">
+                                            <a>Register an account</a>
+                                        </Link>
+                                    </p>
+                                </>
+                            )}
+                        </form>
+                    </Card>
                 </Container>
             </section>
         </>

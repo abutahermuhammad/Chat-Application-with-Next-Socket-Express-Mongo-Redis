@@ -1,4 +1,5 @@
-import { Button, Input, Spinner } from "@geist-ui/core";
+import { Button, Card, Input, Spinner } from "@geist-ui/core";
+import { Lock, Mail, User } from "@geist-ui/icons";
 import Link from "next/link";
 import { useState } from "react";
 import useAuth from "../../../../hooks/useAuth";
@@ -47,118 +48,127 @@ const RegisterForm = () => {
                 </Container>
 
                 <Container className="flex justify-center items-center xl:pt-2">
-                    <form
-                        className="xl:w-2/6 md:w-3/5 p-7 shadow-xl "
-                        onSubmit={(e) =>
-                            registerHandler(e, name, email, password)
-                        }
-                    >
-                        {success && (
-                            <Note
-                                type="success"
-                                title={success}
-                                marginBottom={20}
-                            />
-                        )}
-
-                        {error && (
-                            <Note
-                                type="danger"
-                                title={error}
-                                marginBottom={20}
-                            />
-                        )}
-                        {message && (
-                            <Note
-                                type="danger"
-                                title={message}
-                                marginBottom={20}
-                            />
-                        )}
-
-                        {loggedin && user.email ? (
-                            <div className="xl:py-16 md:py-10 sm:py-7 flex flex-col items-center justify-between">
-                                <Spinner className="mb-3" size={25} />
-                                <p>Redirecting to profile page</p>
-                            </div>
-                        ) : (
-                            <>
-                                <Input
-                                    disabled={loging}
-                                    style={{ width: "100%" }}
-                                    className="w-full mb-4"
-                                    isInvalid={false}
-                                    required
-                                    name="fullname"
-                                    label="Ful name"
-                                    placeholder="e.g. John Doe"
-                                    validationMessage="This field is required"
-                                    onChange={(e) => setName(e.target.value)}
-                                    onBlur={(e) => setName(e.target.value)}
+                    <Card className="xl:w-2/6 md:w-3/5 shadow-xl ">
+                        <form
+                            onSubmit={(e) =>
+                                registerHandler(e, name, email, password)
+                            }
+                        >
+                            {success && (
+                                <Note
+                                    type="success"
+                                    title={success}
+                                    marginBottom={20}
                                 />
+                            )}
 
-                                <Input
-                                    disabled={loging}
-                                    style={{ width: "100%" }}
-                                    className="w-full mb-3"
-                                    isInvalid={false}
-                                    required
-                                    type="email"
-                                    name="email"
-                                    label="Email"
-                                    placeholder="e.g. example@email.com"
-                                    validationMessage="This field is required"
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    onBlur={(e) => setEmail(e.target.value)}
+                            {error && (
+                                <Note
+                                    type="danger"
+                                    title={error}
+                                    marginBottom={20}
                                 />
-
-                                <Input
-                                    disabled={loging}
-                                    style={{ width: "100%" }}
-                                    className="w-full mb-4"
-                                    isInvalid={false}
-                                    required
-                                    type="password"
-                                    name="password"
-                                    label="Password"
-                                    placeholder="******"
-                                    validationMessage="This field is required"
-                                    onChange={(e) =>
-                                        setPassword(e.target.value)
-                                    }
-                                    onBlur={(e) => setPassword(e.target.value)}
+                            )}
+                            {message && (
+                                <Note
+                                    type="danger"
+                                    title={message}
+                                    marginBottom={20}
                                 />
+                            )}
 
-                                {/* Login Button */}
-                                <Button
-                                    disabled={loging}
-                                    className="w-full mb-3"
-                                    type="submit"
-                                >
-                                    {loging ? <Spinner size={16} /> : "Sign in"}
-                                </Button>
+                            {loggedin && user.email ? (
+                                <div className="xl:py-16 md:py-10 sm:py-7 flex flex-col items-center justify-between">
+                                    <Spinner className="mb-3" size={25} />
+                                    <p>Redirecting to profile page</p>
+                                </div>
+                            ) : (
+                                <>
+                                    <Input
+                                        disabled={loging}
+                                        width="100%"
+                                        className="w-full mb-4"
+                                        required
+                                        icon={<User />}
+                                        name="fullname"
+                                        placeholder="e.g. John Doe"
+                                        validationMessage="This field is required"
+                                        onChange={(e) =>
+                                            setName(e.target.value)
+                                        }
+                                        onBlur={(e) => setName(e.target.value)}
+                                    />
 
-                                {/* Sign in with google */}
-                                <Button
-                                    disabled={gLoging}
-                                    className="w-full mb-5"
-                                >
-                                    {gLoging ? (
-                                        <Spinner size={16} />
-                                    ) : (
-                                        "Login with Gmail"
-                                    )}
-                                </Button>
+                                    <Input
+                                        disabled={loging}
+                                        className="w-full mb-3"
+                                        width={"100%"}
+                                        icon={<Mail />}
+                                        required
+                                        // type="email"
+                                        name="email"
+                                        placeholder="e.g. example@email.com"
+                                        validationMessage="This field is required"
+                                        value={email}
+                                        onChange={(e) =>
+                                            setEmail(e.target.value)
+                                        }
+                                        onBlur={(e) => setEmail(e.target.value)}
+                                    />
 
-                                <p className="text-center">
-                                    Are you an old user?{" "}
-                                    <Link href="/login">
-                                        <a>sign in</a>
-                                    </Link>
-                                </p>
-                            </>
-                        )}
-                    </form>
+                                    <Input
+                                        disabled={loging}
+                                        width={"100%"}
+                                        className="w-full mb-4"
+                                        icon={<Lock />}
+                                        required
+                                        name="password"
+                                        placeholder="******"
+                                        validationMessage="This field is required"
+                                        onChange={(e) =>
+                                            setPassword(e.target.value)
+                                        }
+                                        onBlur={(e) =>
+                                            setPassword(e.target.value)
+                                        }
+                                    />
+
+                                    {/* Login Button */}
+                                    <Button
+                                        disabled={loging}
+                                        className="w-full mb-3"
+                                        type="secondary"
+                                        // icon={<LogIn />}
+                                    >
+                                        {loging ? (
+                                            <Spinner size={16} />
+                                        ) : (
+                                            "Register"
+                                        )}
+                                    </Button>
+
+                                    {/* Sign in with google */}
+                                    <Button
+                                        disabled={gLoging}
+                                        className="w-full mb-5"
+                                    >
+                                        {gLoging ? (
+                                            <Spinner size={16} />
+                                        ) : (
+                                            "Login with Gmail"
+                                        )}
+                                    </Button>
+
+                                    <p className="text-center">
+                                        Are you an old user?{" "}
+                                        <Link href="/login">
+                                            <a>sign in</a>
+                                        </Link>
+                                    </p>
+                                </>
+                            )}
+                        </form>
+                    </Card>
                 </Container>
             </section>
         </>
