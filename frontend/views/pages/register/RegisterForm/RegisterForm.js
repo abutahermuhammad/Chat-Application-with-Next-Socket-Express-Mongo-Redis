@@ -42,13 +42,13 @@ const RegisterForm = () => {
         <>
             <section className="mv_login-form min-h-fit">
                 <Container className="xl:pt-12">
-                    <h4 className="text-6xl text-center mb-5">
+                    <h4 className="text-3xl text-center mb-5">
                         Create a new account
                     </h4>
                 </Container>
 
-                <Container className="flex justify-center items-center xl:pt-2">
-                    <Card className="xl:w-2/6 md:w-3/5 shadow-xl ">
+                <Container className="xl:pt-2 mb-3">
+                    <Card className="xl:w-96 md:w-96 shadow-xl ">
                         <form
                             onSubmit={(e) =>
                                 registerHandler(e, name, email, password)

@@ -1,4 +1,4 @@
-import { Avatar } from "@geist-ui/core";
+import { Avatar, Image } from "@geist-ui/core";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import useAuth from "../../../hooks/useAuth";
@@ -8,18 +8,19 @@ const Navigation = () => {
     const router = useRouter();
     const { user, loggedin, signoutHandler } = useAuth();
 
-    console.log("route", router);
+    // console.log("route", user);
 
     return (
         <>
             <nav className="mv_primary-nav">
-                <Container className="py-1">
+                <Container className="py-4">
                     <div className="flex justify-between items-center">
                         {/* Left Side */}
                         <div className="">
                             <Link href="/">
                                 <a className="font-bold text-xl text-base text-teal-400">
-                                    Miah Vai
+                                    {/* Miah Vai */}
+                                    <Image height="36px" src="/favicon.svg" />
                                 </a>
                             </Link>
                         </div>
@@ -40,26 +41,26 @@ const Navigation = () => {
                                 size={36}
                             />
 
-                            <ul class="absolute right-0 w-48 shadow-2xl hidden text-gray-700 pt-1 group-hover:block">
+                            <ul className="absolute right-0 w-48 shadow-2xl hidden text-gray-700 pt-1 group-hover:block">
                                 {loggedin && user.email && (
                                     <>
-                                        <li class="">
+                                        <li className="">
                                             <Link href="/profile">
-                                                <a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap">
+                                                <a className="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap">
                                                     Profile
                                                 </a>
                                             </Link>
                                         </li>
-                                        <li class="">
-                                            <Link href="/settings">
-                                                <a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap">
+                                        <li className="">
+                                            <Link href="/profile/settings">
+                                                <a className="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap">
                                                     Settings
                                                 </a>
                                             </Link>
                                         </li>
 
                                         <li
-                                            class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
+                                            className="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
                                             onClick={signoutHandler}
                                         >
                                             Sign out
@@ -70,16 +71,16 @@ const Navigation = () => {
                                 {/* Logged out state */}
                                 {!loggedin && !user.email && (
                                     <>
-                                        <li class="">
+                                        <li className="">
                                             <Link href="/login">
-                                                <a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap">
+                                                <a className="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap">
                                                     Sign in
                                                 </a>
                                             </Link>
                                         </li>
-                                        <li class="">
+                                        <li className="">
                                             <Link href="/register">
-                                                <a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap">
+                                                <a className="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap">
                                                     Register
                                                 </a>
                                             </Link>
@@ -91,42 +92,6 @@ const Navigation = () => {
                     </div>
                 </Container>
             </nav>
-
-            {/* {router.route.includes("/profile") && (
-                <nav className="mv_primary-nav border-t border-slate-300 hover:border-slate-400">
-                    <Container className="">
-                        <div className="l">
-                            <ul class="flex">
-                                {loggedin && user.email && (
-                                    <>
-                                        <li class="pt-1 pb-2 mr-4 border-b-2">
-                                            <Link href="/profile">
-                                                <a class="relative inline-block rounded bg-gray-200 hover:bg-gray-400 whitespace-no-wrap">
-                                                    General
-                                                </a>
-                                            </Link>
-                                        </li>
-                                        <li class="py-1 pr-4">
-                                            <Link href="/settings">
-                                                <a class="rounded-t bg-gray-200 hover:bg-gray-400 block whitespace-no-wrap">
-                                                    Activity
-                                                </a>
-                                            </Link>
-                                        </li>
-                                        <li class="py-1 pr-4">
-                                            <Link href="/settings">
-                                                <a class="rounded-t bg-gray-200 hover:bg-gray-400 block whitespace-no-wrap">
-                                                    Settings
-                                                </a>
-                                            </Link>
-                                        </li>
-                                    </>
-                                )}
-                            </ul>
-                        </div>
-                    </Container>
-                </nav>
-            )} */}
         </>
     );
 };

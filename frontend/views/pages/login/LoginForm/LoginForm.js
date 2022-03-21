@@ -1,4 +1,4 @@
-import { Button, Card, Input } from "@geist-ui/core";
+import { Button, Card, Input, Loading, Text } from "@geist-ui/core";
 import { Lock, Mail } from "@geist-ui/icons";
 import Link from "next/link";
 import { useState } from "react";
@@ -44,13 +44,14 @@ const LoginForm = () => {
         <>
             <section className="mv_login-form min-h-fit">
                 <Container className="xl:pt-12 md:pt-10 sm:pt-7">
-                    <h4 className="text-6xl text-center mb-5">Log in</h4>
+                    <h4 className="text-3xl text-center mb-5">Log in</h4>
                 </Container>
 
-                <Container className="flex justify-center items-center xl:pt-2">
-                    <Card className="xl:w-2/6 md:w-3/5 ">
+                <Container className="xl:pt-2 mb-3">
+                    <Card className="xl:w-96 md:w-96 shadow-xl">
                         <form
                             onSubmit={(e) => loginHandler(e, email, password)}
+                            // className="xl:w-96 md:w-96 "
                         >
                             {success && (
                                 <Card type="success" marginBottom={20}>

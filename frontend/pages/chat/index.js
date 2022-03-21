@@ -1,11 +1,11 @@
 /** @format */
 
 import Head from "next/head";
-import useFirebase from "../hooks/useFirebase";
-import ChatBox from "../views/pages/Home/ChatBox/ChatBox";
-import Layout from "../views/shared/Layout/Layout";
+import useFirebase from "../../hooks/useFirebase";
+import ChatBox from "../../views/pages/Home/ChatBox/ChatBox";
+import Layout from "../../views/shared/Layout/Layout";
 
-export const Home = () => {
+export const Chat = () => {
     const { user, signinWith0Handler } = useFirebase();
 
     console.log("Email: ", user?.email);
@@ -32,4 +32,4 @@ export const Home = () => {
     );
 };
 
-export default Home;
+export default Chat;

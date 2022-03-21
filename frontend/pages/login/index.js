@@ -11,7 +11,7 @@ const Login = () => {
         router.back()
     ) : (
         <>
-            <Layout className="mv_login">
+            <Layout className="mv_login flex justify-center items-center bg-c-1">
                 <LoginForm />
             </Layout>
         </>

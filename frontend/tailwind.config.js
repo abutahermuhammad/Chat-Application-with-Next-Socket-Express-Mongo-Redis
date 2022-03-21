@@ -1,13 +1,15 @@
 module.exports = {
     // prefix: "mv_",
     // darkMode: "media",
+    mode: "jit",
     important: true,
-    content: [
+    purge: [
         "./pages/**/**/**/*.{js,ts,jsx,tsx}",
         "./views/**/**/**/*.{js,ts,jsx,tsx}",
     ],
     theme: {
         colors: {
+            white: "#FFFFFF",
             blue: "#1fb6ff",
             purple: "#7e5bef",
             pink: "#ff49db",
@@ -32,4 +34,7 @@ module.exports = {
         },
     },
     Plugin: [],
+    // corePlugins: {
+    //     preflight: false,
+    // },
 };
