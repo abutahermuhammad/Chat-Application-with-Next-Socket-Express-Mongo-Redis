@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import io from "socket.io-client";
 
 const messagedata = [
     {
@@ -40,13 +41,13 @@ const useChat = () => {
     const [verifiedUser, setVerifiedUser] = useState(true);
 
     // Socket Initialization
-    // const socket = io.connect("http://localhost:5000");
+    const socket = io.connect("http://localhost:5000");
 
-    // useEffect(() => {
-    //     socket.on("message", ({ _id, timestamp, sender, message }) => {
-    //         setMessages([...messages, { _id, timestamp, sender, message }]);
-    //     });
-    // });
+    useEffect(() => {
+        socket.on("message", ({ _id, timestamp, sender, message }) => {
+            setMessages([...messages, { _id, timestamp, sender, message }]);
+        });
+    });
 
     /**
      * Connect to new room

@@ -20,8 +20,8 @@ const ProfileSettings = () => {
         <>
             <>
                 <Layout>
-                    <section>
-                        <Container className="xl:pb-12 md:pb-10 sm:pb-7">
+                    <section className="mt-24">
+                        <Container className="xl:pb-10 md:pb-10 sm:pb-7">
                             <Text h1 className="text-4xl font-medium">
                                 Account Settings
                             </Text>

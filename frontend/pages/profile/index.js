@@ -10,9 +10,9 @@ const Profile = () => {
         <>
             <Layout className="mv_page-profile">
                 <section className=" mt-24 mb-4">
-                    <Container className="xl:pb-6 md:pb-6 sm:pb-6">
-                        <Text h1 className="text-2xl font-medium">
-                            Personal profile
+                    <Container className="xl:pb-10 md:pb-10 sm:pb-7">
+                        <Text h1 className="text-4xl font-medium">
+                            Personal Profile
                         </Text>
                     </Container>
 

@@ -2,7 +2,7 @@
 
 import Head from "next/head";
 import useFirebase from "../hooks/useFirebase";
-import ChatBox from "../views/pages/Home/ChatBox/ChatBox";
+import Hero from "../views/pages/Home/Hero/Hero";
 import Layout from "../views/shared/Layout/Layout";
 
 export const Home = () => {
@@ -23,10 +23,10 @@ export const Home = () => {
 
             <Layout className="mv_page-home flex items-center">
                 {/* Hero  */}
-                {/* <Hero /> */}
+                <Hero />
 
                 {/* ChatBox */}
-                <ChatBox />
+                {/* <ChatBox /> */}
             </Layout>
         </>
     );
