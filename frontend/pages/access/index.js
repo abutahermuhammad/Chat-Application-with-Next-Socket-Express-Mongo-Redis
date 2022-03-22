@@ -1,5 +1,5 @@
 import { Button, Card, Input, Loading, Text } from "@geist-ui/core";
-import { Compass, Loader, Lock } from "@geist-ui/icons";
+import { Compass, Lock } from "@geist-ui/icons";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
@@ -15,7 +15,7 @@ const Access = () => {
     const [roomID, setRoomID] = useState("");
     const [connecting, setConnecting] = useState(false);
 
-    const connectionHandler = async (e, roomID, password) => {
+    const connectionHandler = async (e, roomID, user, password) => {
         setConnecting(true);
         await e.preventDefault();
 
@@ -28,21 +28,23 @@ const Access = () => {
         setConnecting(false);
     };
 
-    return router.isFallback ? (
-        <Layout>
-            <Container>
-                <Loader />
-            </Container>
-        </Layout>
-    ) : (
+    return (
         <>
-            <Layout className="mv_login flex justify-center items-center bg-c-1">
+            <Layout
+                className="mv_login flex justify-center pt-24 bg-c-1"
+                login={true}
+            >
                 <section className="mv_login-form min-h-fit">
-                    <Container className="xl:pt-2 mb-3">
+                    <Container className="mb-3">
                         <Card className="xl:w-96 md:w-96 shadow-xl">
                             <form
                                 onSubmit={(e) =>
-                                    connectionHandler(e, roomID, password)
+                                    connectionHandler(
+                                        e,
+                                        roomID,
+                                        user.id,
+                                        password
+                                    )
                                 }
                                 // className="xl:w-96 md:w-96 "
                             >

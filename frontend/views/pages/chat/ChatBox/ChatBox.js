@@ -15,7 +15,7 @@ const ChatBox = () => {
         return messages?.map((message, i) =>
             message?.user === user?.uid ? (
                 <div
-                    key={message?._id}
+                    key={`${message?._id}${i}`}
                     className="w-full relative inline-flex justify-end items-center"
                 >
                     {/* Date */}

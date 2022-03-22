@@ -41,11 +41,11 @@ const RegisterForm = () => {
     return (
         <>
             <section className="mv_login-form min-h-fit">
-                <Container className="xl:pt-12">
+                {/* <Container className="xl:pt-12">
                     <h4 className="text-3xl text-center mb-5">
                         Create a new account
                     </h4>
-                </Container>
+                </Container> */}
 
                 <Container className="xl:pt-2 mb-3">
                     <Card className="xl:w-96 md:w-96 shadow-xl ">
@@ -54,11 +54,14 @@ const RegisterForm = () => {
                                 registerHandler(e, name, email, password)
                             }
                         >
+                            <h4 className="text-3xl text-center mb-8">
+                                Register
+                            </h4>
                             {success && (
                                 <Note
                                     type="success"
                                     title={success}
-                                    marginBottom={20}
+                                    className="mb-4"
                                 />
                             )}
 
@@ -66,21 +69,26 @@ const RegisterForm = () => {
                                 <Note
                                     type="danger"
                                     title={error}
-                                    marginBottom={20}
+                                    className="mb-4"
                                 />
                             )}
                             {message && (
                                 <Note
                                     type="danger"
                                     title={message}
-                                    marginBottom={20}
+                                    className="mb-4"
                                 />
                             )}
 
                             {loggedin && user.email ? (
-                                <div className="xl:py-16 md:py-10 sm:py-7 flex flex-col items-center justify-between">
-                                    <Spinner className="mb-3" size={25} />
-                                    <p>Redirecting to profile page</p>
+                                <div className="flex flex-col items-center justify-between">
+                                    <Spinner
+                                        className="xl:my-16 md:my-10 sm:my-7"
+                                        size={25}
+                                    />
+                                    <p className="mb-3">
+                                        Redirecting to profile page
+                                    </p>
                                 </div>
                             ) : (
                                 <>

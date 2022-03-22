@@ -7,11 +7,12 @@ const Login = () => {
     const router = useRouter();
     const { user, loggedin } = useAuth();
 
-    return loggedin && user.email ? (
-        router.back()
-    ) : (
+    return (
         <>
-            <Layout className="mv_login flex justify-center items-center bg-c-1">
+            <Layout
+                className="mv_login flex justify-center pt-24 bg-c-1"
+                loginRedirect={true}
+            >
                 <LoginForm />
             </Layout>
         </>

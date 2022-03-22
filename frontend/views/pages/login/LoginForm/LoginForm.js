@@ -43,9 +43,9 @@ const LoginForm = () => {
     return (
         <>
             <section className="mv_login-form min-h-fit">
-                <Container className="xl:pt-12 md:pt-10 sm:pt-7">
+                {/* <Container className="xl:pt-12 md:pt-10 sm:pt-7">
                     <h4 className="text-3xl text-center mb-5">Log in</h4>
-                </Container>
+                </Container> */}
 
                 <Container className="xl:pt-2 mb-3">
                     <Card className="xl:w-96 md:w-96 shadow-xl">
@@ -53,22 +53,27 @@ const LoginForm = () => {
                             onSubmit={(e) => loginHandler(e, email, password)}
                             // className="xl:w-96 md:w-96 "
                         >
+                            <h4 className="text-3xl text-center mb-8">
+                                Sign in
+                            </h4>
                             {success && (
-                                <Card type="success" marginBottom={20}>
+                                <Card type="success" className="mb-4">
                                     <Text>{success}</Text>
                                 </Card>
                             )}
 
                             {error && (
-                                <Note type="danger" marginBottom={20}>
+                                <Note type="danger" className="mb-4">
                                     <Text>{error}</Text>
                                 </Note>
                             )}
 
                             {loggedin && user.email ? (
-                                <div className="xl:py-16 md:py-10 sm:py-7 flex flex-col items-center justify-between">
-                                    <Loading className="mb-3" />
-                                    <p>Redirecting to profile page</p>
+                                <div className="flex flex-col items-center justify-between">
+                                    <Loading className="xl:py-16 md:py-10 sm:py-7" />
+                                    <p className="mb-3">
+                                        Redirecting to profile page
+                                    </p>
                                 </div>
                             ) : (
                                 <>

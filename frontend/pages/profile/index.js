@@ -8,7 +8,7 @@ const Profile = () => {
 
     return (
         <>
-            <Layout className="mv_page-profile">
+            <Layout className="mv_page-profile" login={true}>
                 <section className=" mt-24 mb-4">
                     <Container className="xl:pb-10 md:pb-10 sm:pb-7">
                         <Text h1 className="text-4xl font-medium">

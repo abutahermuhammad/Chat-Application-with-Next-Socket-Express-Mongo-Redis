@@ -34,19 +34,24 @@ const messagedata = [
     },
 ];
 
+/**
+ * Socket Initialization
+ *
+ * Initialing Socket outside of the component to avoid unnecessary rendering.
+ */
+const socket = io.connect("http://localhost:5000");
+
 const useChat = () => {
     const [messages, setMessages] = useState(messagedata);
     const [roomID, setRoomID] = useState("");
     const [roomPass, setRoomPass] = useState("");
     const [verifiedUser, setVerifiedUser] = useState(true);
 
-    // Socket Initialization
-    const socket = io.connect("http://localhost:5000");
-
     useEffect(() => {
         socket.on("message", ({ _id, timestamp, sender, message }) => {
             setMessages([...messages, { _id, timestamp, sender, message }]);
         });
+        console.log(messages);
     });
 
     /**
@@ -73,7 +78,7 @@ const useChat = () => {
         // New Message Object
         let newMessage = {
             _id: "asdf".toUpperCase(),
-            timestamp: new Date(),
+            timestamp: Date(),
             message,
             user: senderID,
         };
