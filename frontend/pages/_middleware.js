@@ -20,9 +20,9 @@ export const middleware = async (request, ev) => {
     response.clearCookie("hello");
 
     console.log({
-        ip: req.ip,
-        geo: req.geo, // this will spin the globe!
-        ua: req.ua,
+        ip: request.ip,
+        geo: request.geo, // this will spin the globe!
+        ua: request.ua,
     });
 
     return response;
