@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server";
-import useAuth from "../hooks/useAuth";
 
-export const middleware = async (req, ev) => {
-    const { user } = useAuth();
+export const middleware = async (req, cv) => {
+    // const { user } = useAuth();
     const { pathname } = req.nextUrl;
     console.log("Pathname: ", pathname);
 
