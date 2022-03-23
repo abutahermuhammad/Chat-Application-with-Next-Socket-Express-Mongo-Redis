@@ -9,7 +9,8 @@ export const Chat = () => {
 
     return (
         <>
-            <Layout className="mv_page-chat flex items-center" login={true}>
+            {/* <Layout className="mv_page-chat flex items-center" login={true}> */}
+            <Layout className="mv_page-chat">
                 {/* ChatBox */}
                 <ChatBox />
             </Layout>

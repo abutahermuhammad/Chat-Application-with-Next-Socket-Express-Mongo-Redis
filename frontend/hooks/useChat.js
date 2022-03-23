@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import io from "socket.io-client";
+import { ChatContext } from "../contexts/ChatProvider";
 
 const messagedata = [
     {
@@ -41,18 +42,35 @@ const messagedata = [
  */
 const socket = io.connect("http://localhost:5000");
 
-const useChat = () => {
-    const [messages, setMessages] = useState(messagedata);
+export const Chat = () => {
+    const [messages, setMessages] = useState([]);
     const [roomID, setRoomID] = useState("");
     const [roomPass, setRoomPass] = useState("");
     const [verifiedUser, setVerifiedUser] = useState(true);
 
+    /**
+     * This hook runs socket event after first page load.
+     */
     useEffect(() => {
-        socket.on("message", ({ _id, timestamp, sender, message }) => {
-            setMessages([...messages, { _id, timestamp, sender, message }]);
+        socket.on("message", (message) => {
+            // let tempStack = messages;
+            // console.log("Old STACK", tempStack);
+            // console.log("NEW MESSAGE", messages);
+            // tempStack.push(message);
+            setMessages([...messages, message]);
+            // console.log("NEW STACK", tempStack);
         });
-        console.log(messages);
     });
+    console.log("MESSAGE STACK", messages);
+
+    // useEffect(() => {
+    //     let messages = JSON.parse(localStorage.getItem("mesages"));
+
+    //     if (messages) setMessages(messages);
+    // }, []);
+    useEffect(() => {
+        localStorage.setItem("mesages", JSON.stringify(messages) || []);
+    }, [messages.length]);
 
     /**
      * Connect to new room
@@ -69,26 +87,27 @@ const useChat = () => {
      * @param {*} e
      * @param {*} message
      */
-    const sendNewMessage = (e, senderID, message) => {
+    const sendNewMessage = async (
+        e,
+        timestamp,
+        senderId,
+        senderPhoto,
+        message
+    ) => {
         e.preventDefault();
-
-        // Previous Messages
-        // let tempMessages = messages;
 
         // New Message Object
         let newMessage = {
             _id: "asdf".toUpperCase(),
-            timestamp: Date(),
+            timestamp,
+            user: {
+                _id: senderId,
+                img: senderPhoto,
+            },
             message,
-            user: senderID,
         };
-
-        // Adding new message to the temp stack.
-        // tempMessages.push(newMessage);
-
-        // Re-Initializing message list
-        // setMessages(tempMessages);
-        socket.emit("message", newMessage);
+        // console.log(newMessage);
+        await socket.emit("message", newMessage);
     };
 
     return {
@@ -101,4 +120,7 @@ const useChat = () => {
     };
 };
 
+const useChat = () => {
+    return useContext(ChatContext);
+};
 export default useChat;

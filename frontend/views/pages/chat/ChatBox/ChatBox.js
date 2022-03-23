@@ -13,7 +13,7 @@ const ChatBox = () => {
     // Chat Renderer
     const chatRender = () => {
         return messages?.map((message, i) =>
-            message?.user === user?.uid ? (
+            message.user?._id === user?.uid ? (
                 <div
                     key={`${message?._id}${i}`}
                     className="w-full relative inline-flex justify-end items-center"
@@ -32,20 +32,22 @@ const ChatBox = () => {
                     <Avatar
                         width="28px"
                         height="28px"
-                        src={user.photoURL}
+                        src={message.user.img}
+                        alt={message.user._id}
                         className="border-2 rounded-full"
                     />
                 </div>
             ) : (
                 <div
-                    key={message?._id}
+                    key={`${message?.timestamp}${message?.user._id}`}
                     className="w-full relative inline-flex justify-start items-center"
                 >
                     {/* User Avatar */}
                     <Avatar
                         width="28px"
                         height="28px"
-                        src={user.photoURL}
+                        src={message.user.img}
+                        alt={message.user._id}
                         className="border-2 rounded-full"
                     />
 
@@ -56,7 +58,7 @@ const ChatBox = () => {
 
                     {/* Date */}
                     <Text span className="text-sm">
-                        {new Date(Date()).toLocaleString()}
+                        {new Date(message?.timestamp).toLocaleString()}
                     </Text>
                 </div>
             )
@@ -65,7 +67,7 @@ const ChatBox = () => {
 
     return (
         <>
-            <section className="mv_chatbox mt-24 mb-4">
+            <section className="mv_chatbox mt-24 mb-4 w-full">
                 <Container>
                     <Fieldset>
                         <Fieldset.Content>
@@ -75,29 +77,49 @@ const ChatBox = () => {
                             </Fieldset.Subtitle>
 
                             <Card className="mv_chat-area">
-                                <Card.Body>{chatRender()}</Card.Body>
+                                <Card.Body className="h-64">
+                                    {chatRender()}
+                                </Card.Body>
 
                                 <Card.Footer>
-                                    <form className="w-full flex justify-between items-center">
+                                    <form
+                                        className="w-full flex justify-between items-center"
+                                        onSubmit={(e) => {
+                                            sendNewMessage(
+                                                e,
+                                                Date(),
+                                                user.uid,
+                                                user.photoURL,
+                                                thisMessage
+                                            );
+                                            setThisMessage("");
+                                        }}
+                                    >
                                         <Input
                                             placeholder="Your message"
                                             padding="9px"
                                             // className="w-75"
                                             width="100%"
                                             pl="0"
+                                            value={thisMessage}
                                             onChange={(e) =>
                                                 setThisMessage(e.target.value)
                                             }
+                                            required
                                         />
 
                                         <Button
-                                            onClick={(e) =>
-                                                sendNewMessage(
-                                                    e,
-                                                    user?.uid,
-                                                    thisMessage
-                                                )
-                                            }
+                                            // onClick={(e) => {
+                                            //     sendNewMessage(
+                                            //         e,
+                                            //         Date(),
+                                            //         user.uid,
+                                            //         user.photoURL,
+                                            //         thisMessage
+                                            //     );
+                                            //     setThisMessage("");
+                                            // }}
+                                            htmlType="submit"
                                             type="secondary"
                                             icon={<Send />}
                                         />

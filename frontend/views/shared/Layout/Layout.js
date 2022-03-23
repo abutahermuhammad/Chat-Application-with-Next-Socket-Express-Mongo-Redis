@@ -21,7 +21,7 @@ const Layout = ({ className, login, loginRedirect, children }) => {
             setLoading(false);
         }
 
-        if (loginRedirect && user.email) router.push("/profile");
+        // if (loginRedirect && user.email) router.push("/profile");
     });
 
     return loading ? (

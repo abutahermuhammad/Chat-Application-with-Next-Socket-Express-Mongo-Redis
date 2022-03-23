@@ -63,9 +63,9 @@ const LoginForm = () => {
                             )}
 
                             {error && (
-                                <Note type="danger" className="mb-4">
+                                <Card type="danger" className="mb-4">
                                     <Text>{error}</Text>
-                                </Note>
+                                </Card>
                             )}
 
                             {loggedin && user.email ? (
