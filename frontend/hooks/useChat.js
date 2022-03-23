@@ -59,18 +59,27 @@ export const Chat = () => {
             // tempStack.push(message);
             setMessages([...messages, message]);
             // console.log("NEW STACK", tempStack);
+            updateLocalStorage([...messages, message]);
         });
     });
+    useEffect(() => {
+        console.log("Re-run");
+    }, []);
+
     console.log("MESSAGE STACK", messages);
 
-    // useEffect(() => {
-    //     let messages = JSON.parse(localStorage.getItem("mesages"));
-
-    //     if (messages) setMessages(messages);
-    // }, []);
     useEffect(() => {
-        localStorage.setItem("mesages", JSON.stringify(messages) || []);
-    }, [messages.length]);
+        let messages = JSON.parse(localStorage.getItem("mesages"));
+
+        if (messages) setMessages(messages);
+    }, []);
+    // useEffect(() => {
+    //     localStorage.setItem("mesages", JSON.stringify(messages) || []);
+    // }, [messages.length]);
+
+    const updateLocalStorage = (msg) => {
+        localStorage.setItem("mesages", JSON.stringify(msg));
+    };
 
     /**
      * Connect to new room

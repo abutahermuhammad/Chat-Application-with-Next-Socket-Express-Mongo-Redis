@@ -31,6 +31,9 @@ module.exports = {
             borderRadius: {
                 "4xl": "2rem",
             },
+            spacing: {
+                cscreen: "calc(100vh - 120px)",
+            },
         },
     },
     Plugin: [],

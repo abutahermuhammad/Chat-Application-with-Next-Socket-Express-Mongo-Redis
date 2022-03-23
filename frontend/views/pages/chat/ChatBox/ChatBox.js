@@ -77,7 +77,7 @@ const ChatBox = () => {
                             </Fieldset.Subtitle>
 
                             <Card className="mv_chat-area">
-                                <Card.Body className="h-64">
+                                <Card.Body className="xl:h-[20rem] lg:h-[20rem]">
                                     {chatRender()}
                                 </Card.Body>
 
